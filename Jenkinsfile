@@ -30,7 +30,7 @@ pipeline {
       steps{
         script {
           docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
-            dockerImage.push("${env.BUILD_NUMBER}")
+            dockerImage.push("${BUILD_NUMBER}")
           }
         }
       }
@@ -39,7 +39,7 @@ pipeline {
     stage('Deploying App to Kubernetes') {
       steps {
         script {
-           kubernetesDeploy(configs: "deploy/deployment.yaml", kubeconfigId: "kubernetes")
+           kubernetesDeploy(enableConfigSubstitution: true, configs: "deploy/deployment.yaml", kubeconfigId: "kubernetes")
            kubernetesDeploy(configs: "deploy/service.yaml", kubeconfigId: "kubernetes")
         }
       }
