@@ -30,7 +30,7 @@ pipeline {
       steps{
         script {
           docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
-            dockerImage.push("latest")
+            dockerImage.push("${env.BUILD_NUMBER}")
           }
         }
       }
@@ -40,6 +40,7 @@ pipeline {
       steps {
         script {
            kubernetesDeploy(configs: "deploy/deployment.yaml", kubeconfigId: "kubernetes")
+           kubernetesDeploy(configs: "deploy/service.yaml", kubeconfigId: "kubernetes")
         }
       }
     }
