@@ -9,7 +9,7 @@ pipeline {
 
   stages {
 
-    stage('Checkout Source') {
+    stage('Checkout Latest Source') {
       steps {
         git branch: 'main', url: 'https://github.com/shawon100/php-laravel-app-jenkins-cicd-kubernetes.git'
       }
