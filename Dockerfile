@@ -10,4 +10,4 @@ COPY . /app
 RUN composer install
 
 EXPOSE 8000
-CMD php artisan serve --port=8000
+CMD php artisan serve
