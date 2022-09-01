@@ -15,31 +15,31 @@ pipeline {
       }
     }
 
-    stage('Build image') {
-      steps{
-        script {
-          dockerImage = docker.build dockerimagename
-        }
-      }
-    }
+    // stage('Build image') {
+    //   steps{
+    //     script {
+    //       dockerImage = docker.build dockerimagename
+    //     }
+    //   }
+    // }
 
-    stage('Pushing Image') {
-      environment {
-               registryCredential = 'dockerhublogin'
-           }
-      steps{
-        script {
-          docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
-            dockerImage.push("latest")
-          }
-        }
-      }
-    }
+    // stage('Pushing Image') {
+    //   environment {
+    //            registryCredential = 'dockerhublogin'
+    //        }
+    //   steps{
+    //     script {
+    //       docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
+    //         dockerImage.push("latest")
+    //       }
+    //     }
+    //   }
+    // }
 
     stage('Deploying App to Kubernetes') {
       steps {
         script {
-           kubernetesDeploy(configs: "deploy/deployment.yaml", kubeconfigId: "kubeconfig")
+           sh 'kubectl apply -f deploy/deployment.yaml'
         }
       }
     }
