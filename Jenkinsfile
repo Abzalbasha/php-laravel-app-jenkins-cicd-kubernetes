@@ -1,7 +1,7 @@
 pipeline {
 
   environment {
-    dockerimagename = "shawon10/laravel-hello-1"
+    dockerimagename = "shawon10/laravel-hello-app-1"
     dockerImage = ""
   }
 
@@ -12,6 +12,7 @@ pipeline {
     stage('Checkout Source') {
       steps {
         git branch: 'main', url: 'https://github.com/shawon100/php-laravel-app-jenkins-cicd-kubernetes'
+      }
     }
 
     stage('Build image') {
@@ -38,8 +39,7 @@ pipeline {
     stage('Deploying App to Kubernetes') {
       steps {
         script {
-          kubernetesDeploy(configs: "deploy/deployment.yaml", kubeconfigId: "kubernetes")
-          kubernetesDeploy(configs: "deploy/service.yaml", kubeconfigId: "kubernetes")
+          kubernetesDeploy(configs: "deploy/deployment.yml", kubeconfigId: "kubernetes")
         }
       }
     }
