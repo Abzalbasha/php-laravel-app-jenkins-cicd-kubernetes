@@ -7,6 +7,8 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 WORKDIR /app
 COPY . /app
 # Install unzip utility and libs needed by zip PHP extension 
+RUN apt install zip unzip php5.6-zip
+
 RUN composer install
 
 EXPOSE 8000
