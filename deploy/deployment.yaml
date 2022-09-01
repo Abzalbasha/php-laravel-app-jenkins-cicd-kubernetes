@@ -15,7 +15,7 @@ spec:
       nodeName: demo-cluster-m02
       containers:
         - name: laravel-hello-1
-          image: shawon10/laravel-hello-app-1:${BUILD_NUMBER}
+          image: shawon10/laravel-hello-1:${BUILD_NUMBER}
           imagePullPolicy: Always
           ports:
             - containerPort: 8000
