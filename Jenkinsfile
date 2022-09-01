@@ -13,7 +13,6 @@ pipeline {
       steps {
         checkout scm
         git branch: 'main', url: 'https://github.com/shawon100/php-laravel-app-jenkins-cicd-kubernetes.git'
-        git pull
       }
     }
 
@@ -41,7 +40,8 @@ pipeline {
     stage('Deploying App to Kubernetes') {
       steps {
         script {
-          kubernetesDeploy(configs: "deploy/deployment.yml", kubeconfigId: "kubernetes")
+          kubernetesDeploy(configs: "deploy/deployment.yaml", kubeconfigId: "kubernetes")
+          kubernetesDeploy(configs: "deploy/service.yaml", kubeconfigId: "kubernetes")
         }
       }
     }
