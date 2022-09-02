@@ -18,8 +18,7 @@ pipeline {
     stage('Build image') {
       steps{
         script {
-          //dockerImage = docker.build dockerimagename
-          sh 'docker build -t shawon10/laravel-hello-1:${BUILD_NUMBER} .'
+          dockerImage = docker.build dockerimagename
         }
       }
     }
