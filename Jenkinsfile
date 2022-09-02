@@ -1,7 +1,7 @@
 pipeline {
 
   environment {
-    dockerimagename = "shawon10/laravel-hello-1:${BUILD_NUMBER}"
+    dockerimagename = "shawon10/laravel-hello-1"
     dockerImage = ""
   }
 
@@ -31,7 +31,7 @@ pipeline {
       steps{
         script {
           docker.withRegistry('https://registry.hub.docker.com', registryCredential ) {
-            dockerImage.push("${BUILD_NUMBER}")
+              dockerImage.push("${BUILD_NUMBER}")
           }
         }
       }

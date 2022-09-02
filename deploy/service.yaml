@@ -7,5 +7,5 @@ spec:
     app: laravel-hello-1
   ports:
     - protocol: "TCP"
-      port: 8000
+      port: 5500
   type: NodePort
