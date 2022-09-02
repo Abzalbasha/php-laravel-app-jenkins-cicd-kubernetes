@@ -18,7 +18,8 @@ pipeline {
     stage('Build image') {
       steps{
         script {
-          //sh 'docker build -t htmlapp -f sample.Dockerfile .'
+           sh 'docker rmi -f shawon10/laravel-hello-1:latest'
+           sh 'docker rmi -f shawon10/laravel-hello-1'
            dockerImage = docker.build dockerimagename
         }
       }
@@ -31,7 +32,8 @@ pipeline {
       steps{
         script {
           docker.withRegistry('https://registry.hub.docker.com', registryCredential ) {
-              dockerImage.push("${BUILD_NUMBER}")
+              //dockerImage.push("${BUILD_NUMBER}")
+              dockerImage.push("latest")
           }
         }
       }
