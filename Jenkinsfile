@@ -1,7 +1,7 @@
 pipeline {
 
   environment {
-    dockerimagename = "shawon10/laravel-hello-1"
+    dockerimagename = "shawon10/laravel-hello-1:${BUILD_NUMBER}"
     dockerImage = ""
   }
 
@@ -19,7 +19,7 @@ pipeline {
       steps{
         script {
           //sh 'docker build -t htmlapp -f sample.Dockerfile .'
-          dockerImage = docker.build dockerimagename:${BUILD_NUMBER}
+           dockerImage = docker.build dockerimagename
         }
       }
     }
