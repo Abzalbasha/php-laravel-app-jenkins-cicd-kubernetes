@@ -6,6 +6,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 WORKDIR /app
 COPY . /app
+RUN chmod -R 777 /app
 # Install unzip utility and libs needed by zip PHP extension 
 RUN composer install
 
