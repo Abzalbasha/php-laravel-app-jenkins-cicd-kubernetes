@@ -18,8 +18,8 @@ pipeline {
     stage('Build image') {
       steps{
         script {
-          dockerImage = docker.build dockerimagename
-          sh 'docker build -t htmlapp -f sample.Dockerfile'
+          dockerImage = docker.build dockerimagename:${BUILD_NUMBER} 
+          sh 'docker build -t htmlapp -f sample.Dockerfile .'
         }
       }
     }
