@@ -19,8 +19,7 @@ pipeline {
       steps{
         script {
           //sh 'docker build -t htmlapp -f sample.Dockerfile .'
-          //dockerImage = docker.build dockerimagename
-          sh 'docker build -t shawon10/laravel-hello-app .'
+          dockerImage = docker.build dockerimagename
         }
       }
     }
@@ -32,8 +31,7 @@ pipeline {
       steps{
         script {
           docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
-            //dockerImage.push("${BUILD_NUMBER}")
-            sh 'docker push shawon10/laravel-hello-app '
+            dockerImage.push("${BUILD_NUMBER}")
           }
         }
       }
