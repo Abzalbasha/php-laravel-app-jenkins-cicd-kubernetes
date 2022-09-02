@@ -32,7 +32,7 @@ pipeline {
         script {
           docker.withRegistry('https://registry.hub.docker.com', registryCredential ) {
               dockerImage.push("${BUILD_NUMBER}")
-              sh 'docker rmi -f shawon10/laravel-hello-1:${BUILD_NUMBER}'
+              sh 'docker rmi -f ${dockerimagename}:${BUILD_NUMBER}'
           }
         }
       }
