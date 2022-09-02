@@ -1,7 +1,7 @@
 pipeline {
 
   environment {
-    dockerimagename = "shawon10/laravel-hello-1"
+    dockerimagename = "shawon10/laravel-hello-1:${BUILD_NUMBER}"
     dockerImage = ""
   }
 
@@ -19,7 +19,6 @@ pipeline {
       steps{
         script {
            sh 'docker rmi -f shawon10/laravel-hello-1:latest'
-           sh 'docker rmi -f shawon10/laravel-hello-1'
            dockerImage = docker.build dockerimagename
         }
       }
@@ -32,8 +31,8 @@ pipeline {
       steps{
         script {
           docker.withRegistry('https://registry.hub.docker.com', registryCredential ) {
-              //dockerImage.push("${BUILD_NUMBER}")
-              dockerImage.push("latest")
+              dockerImage.push("${BUILD_NUMBER}")
+              sh 'docker rmi -f shawon10/laravel-hello-1:${BUILD_NUMBER}'
           }
         }
       }
