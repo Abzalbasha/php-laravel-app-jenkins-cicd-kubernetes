@@ -8,6 +8,9 @@ ENV \
 WORKDIR $APP_DIR
 COPY . $APP_DIR
 
+# Essentials
+RUN echo "UTC" > /etc/timezone
+RUN apk add --no-cache zip unzip curl
 # Installing bash
 RUN apk add bash
 RUN sed -i 's/bin\/ash/bin\/bash/g' /etc/passwd
@@ -38,7 +41,9 @@ RUN apk add --no-cache php8 \
     php8-pecl-redis
 
 # Installing composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN curl -sS https://getcomposer.org/installer -o composer-setup.php
+RUN php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+RUN rm -rf composer-setup.php
 
 RUN composer install
 
