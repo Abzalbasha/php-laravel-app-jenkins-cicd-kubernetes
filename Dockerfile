@@ -46,8 +46,6 @@ RUN php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 RUN rm -rf composer-setup.php
 
 RUN composer install
-RUN php artisan key:generate
-RUN ls
 
 CMD php artisan serve --host=0.0.0.0 --port=$APP_PORT
 
