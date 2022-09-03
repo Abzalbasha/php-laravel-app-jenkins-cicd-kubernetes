@@ -7,14 +7,18 @@ ENV \
 # the "app" directory (relative to Dockerfile) containers your Laravel app...
 COPY . $APP_DIR
 
-RUN apk add --update \
+RUN apk add --no-cache --update \
     curl \
     php \
     php-opcache \
+    php8-common \
     php-openssl \
     php-pdo \
     php-json \
+    php8-cli \
+    php8-zip \
     php8-iconv \
+    php8-mbstring \
     php-phar \
     php-dom \
     && rm -rf /var/cache/apk/*
