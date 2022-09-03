@@ -5,7 +5,7 @@ ENV \
   APP_PORT="80"
 
 # the "app" directory (relative to Dockerfile) containers your Laravel app...
-COPY app/ $APP_DIR
+COPY . $APP_DIR
 
 RUN apk add --update \
     curl \
@@ -14,11 +14,11 @@ RUN apk add --update \
     php-openssl \
     php-pdo \
     php-json \
+    php8-iconv \
     php-phar \
     php-dom \
     && rm -rf /var/cache/apk/*
 
-RUN docker-php-ext-install mbstring
 RUN curl -sS https://getcomposer.org/installer | php -- \
   --install-dir=/usr/bin --filename=composer
 
