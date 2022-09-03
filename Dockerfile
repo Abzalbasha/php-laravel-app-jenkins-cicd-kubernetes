@@ -7,6 +7,9 @@ ENV \
 # the "app" directory (relative to Dockerfile) containers your Laravel app...
 WORKDIR $APP_DIR
 COPY . $APP_DIR
+RUN ls
+COPY .env.example $APP_DIR/.env
+
 
 # Essentials
 RUN echo "UTC" > /etc/timezone
@@ -46,6 +49,7 @@ RUN php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 RUN rm -rf composer-setup.php
 
 RUN composer install
+RUN php artisan key:generate
 
 CMD php artisan serve --host=0.0.0.0 --port=$APP_PORT
 
