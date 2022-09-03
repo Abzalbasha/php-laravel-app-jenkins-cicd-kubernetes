@@ -18,6 +18,7 @@ RUN apk add --update \
     php-dom \
     && rm -rf /var/cache/apk/*
 
+RUN docker-php-ext-install mbstring
 RUN curl -sS https://getcomposer.org/installer | php -- \
   --install-dir=/usr/bin --filename=composer
 
