@@ -4,10 +4,8 @@ ENV \
   APP_DIR="/app" \
   APP_PORT="80"
 
-# the "app" directory (relative to Dockerfile) containers your Laravel app...
 WORKDIR $APP_DIR
 COPY . $APP_DIR
-RUN ls
 COPY .env.example $APP_DIR/.env
 
 
@@ -49,27 +47,7 @@ RUN php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 RUN rm -rf composer-setup.php
 
 RUN composer install
+# generate an APP_KEY
 RUN php artisan key:generate
 
 CMD php artisan serve --host=0.0.0.0 --port=$APP_PORT
-
-
-# FROM php:8.1-cli
-
-# RUN apt-get update -y && apt-get install -y libmcrypt-dev
-
-# RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
-# WORKDIR /app
-# COPY . /app
-
-# # Install unzip utility and libs needed by zip PHP extension
-# RUN apt-get update && apt-get install -y \
-#     zlib1g-dev \
-#     libzip-dev \
-#     unzip
-# #RUN docker-php-ext-install zip 
-# RUN composer install
-
-# EXPOSE 80
-# CMD php artisan serve --host=0.0.0.0 --port=80

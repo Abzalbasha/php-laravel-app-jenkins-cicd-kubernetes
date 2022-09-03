@@ -12,7 +12,7 @@ spec:
       labels:
         app: laravel-hello-1
     spec:
-      #nodeName: demo-cluster-m02
+      nodeName: demo-cluster-m02
       containers:
         - name: laravel-hello-1
           image: shawon10/laravel-hello-1:${BUILD_NUMBER}
