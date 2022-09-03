@@ -31,7 +31,7 @@ pipeline {
            }
       steps{
         script {
-          docker.withRegistry(registryCredential ) {
+          docker.withRegistry('registry.hub.docker.com', registryCredential) {
               dockerImage.push("${BUILD_NUMBER}")
               sh 'docker rmi -f ${dockerimagename}'
           }
