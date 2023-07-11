@@ -1,0 +1,8 @@
+version: '3'
+services:
+  app:
+    build: .
+    image: php-laravel
+    container_name: laravel-app
+    ports:
+      - 80:80
